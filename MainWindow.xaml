@@ -1,0 +1,60 @@
+﻿<Window x:Name="frmMain" x:Class="Chisu_Diana_Lab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chisu_Diana_Lab5"
+        mc:Ignorable="d"
+        Title="Phone Subscribers Management" Height="469" Width="610" Loaded="frmMain_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="PhoneNumbersTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Phonenum}" Grid.Column="0"/>
+                <TextBlock Text="{Binding Subscriber}" Grid.Column="1"/>
+                <TextBlock Text="{Binding ContractValue}" Grid.Column="2"/>
+                <TextBlock Text="{Binding ContractDate}" Grid.Column="3"/>
+            </Grid>
+        </DataTemplate>
+        <local:PhoneNumbersDataSet x:Key="phoneNumbersDataSet"/>
+        <CollectionViewSource x:Key="phoneNumbersViewSource" Source="{Binding PhoneNumbers,
+        Source={StaticResource phoneNumbersDataSet}}"/>
+    </Window.Resources>
+    <Grid x:Name="grdMain" RenderTransformOrigin="0.502,0.456" Margin="-14,0,79,-6" Loaded="grdMain_Loaded">
+        <Canvas HorizontalAlignment="Left" Width="645" Margin="-46,0,0,10" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.099"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.748"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Button x:Name="btnNew" Content="New" Height="17" Canvas.Left="111" Canvas.Top="58" Width="65" Click="btnNew_Click"/>
+            <Button x:Name="btnEdit" Content="Edit" Height="18" Canvas.Left="111" Canvas.Top="98" Width="65" Click="btnEdit_Click"/>
+            <Button x:Name="btnDelete" Content="Delete" Height="19" Canvas.Left="111" Canvas.Top="136" Width="65" Click="btnDelete_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" IsEnabled="False" Height="20" Canvas.Left="540" Canvas.Top="406" Width="65" Click="btnCancel_Click"/>
+            <Button x:Name="btnExit" Content="Exit" FontWeight="Bold" Height="41" Canvas.Left="111" Canvas.Top="192" Width="65" Click="btnExit_Click"/>
+            <Button x:Name="btnSave" IsEnabled="False" Height="20" Width="65" Canvas.Left="285" Canvas.Top="406" Content="Save" Click="btnSave_Click"/>
+            <ListBox x:Name="lstPhones" Height="175" Canvas.Left="285" Canvas.Top="58" Width="320" ItemsSource="{Binding}"
+            IsSynchronizedWithCurrentItem="False" ItemTemplate="{StaticResource
+            ResourceKey=PhoneNumbersTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch"  />
+            <Button x:Name="btnNext" Content="Next" Height="20" Canvas.Left="540" Canvas.Top="238" Width="65" Click="btnNext_Click"/>
+            <Button x:Name="btnPrevious" Content="Previous" Height="20" Canvas.Left="285" Canvas.Top="238" Width="65" Click="btnPrevious_Click"/>
+            <Label x:Name="lblPhoneNumber" Content="Phone Number" Height="26" Canvas.Left="285" Canvas.Top="265" Width="90"/>
+            <Label x:Name="lblSubscriber" Content="Subscriber" Height="26" Canvas.Left="285" Canvas.Top="300" Width="90"/>
+            <TextBox x:Name="txtPhoneNumber" TextWrapping="Wrap" IsEnabled="False" Height="22" Canvas.Left="458" Canvas.Top="267" Width="147" Text="{Binding Path=Phonenum}" />
+            <TextBox x:Name="txtSubscriber" TextWrapping="Wrap" IsEnabled="False" Height="22" Canvas.Left="458" Canvas.Top="302" Width="147"  Text="{Binding Path=Subscriber}"/>
+            <Label x:Name="lblContractValue" Content="Contract Value" Canvas.Left="285" Canvas.Top="336" Height="26"/>
+            <TextBox x:Name="txtContractValue" TextWrapping="Wrap" Width="147" IsEnabled="False" Canvas.Left="458" Canvas.Top="338" Height="22" Text="{Binding Path=ContractValue}" />
+            <Label x:Name="lblContractDate" Content="Contract Date" Canvas.Left="285" Canvas.Top="372" Height="26"/>
+            <TextBox x:Name="txtContractDate" TextWrapping="Wrap" Width="147" IsEnabled="False" Canvas.Left="458" Canvas.Top="374" Height="22"  Text="{Binding Path=ContractDate}"/>
+        </Canvas>
+
+    </Grid>
+</Window>
